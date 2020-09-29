@@ -3,7 +3,7 @@
 This application is a Node CLI that takes user input and uses that data to dynamically create a team roster that is written to an HTML file. Throughout this project, we explored Object Oriented Programming and Test Driven Development. Take a look below to find a link to a video demoing the app!
 
 ## Installation
-The required dependencies are listed in the package.json file. Running _npm install_ will download the required packages. Following installation, navigate into the _Develop_ and run _node app.js_ to initialize the user prompts.
+The required dependencies are listed in the package.json file. Running _npm install_ will download the required packages. Following installation, navigate into the _Develop_ and run _node app.js_ to initialize the user prompts. After completing the prompts, the Team Data will be written to html file inside of the _output_ folder.
 
 ## Collaboration
 
