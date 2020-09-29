@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 
 
 // Define an array which Employee instances will be pushed
-// const employeeArray = [];
+const employeeArray = [];
 
 // Write a function which prompts user for common information (name, id and email) and lastly, their role.
 promptCommon();
@@ -59,7 +59,8 @@ function specialPrompt(userResponse){
             }
         ]).then(function(specialResponse){
             const manager = new Manager(userResponse.employeeName, userResponse.employeeId, userResponse.employeeEmail, specialResponse.officeNumber)
-            console.log(manager);
+            employeeArray.push(manager);
+            stopPrompt();
         }).catch(function(err){
             if(err) throw err
         })
@@ -72,7 +73,8 @@ function specialPrompt(userResponse){
             }
         ]).then(function(specialResponse){
             const engineer = new Engineer(userResponse.employeeName, userResponse.employeeId, userResponse.employeeEmail, specialResponse.github)
-            console.log(engineer);
+            employeeArray.push(engineer);
+            stopPrompt();
         }).catch(function(err){
             if(err) throw err
         })
@@ -85,11 +87,33 @@ function specialPrompt(userResponse){
             }
         ]).then(function(specialResponse){
             const intern = new Intern(userResponse.employeeName, userResponse.employeeId, userResponse.employeeEmail, specialResponse.school)
-            console.log(intern);
+            employeeArray.push(intern);
+            stopPrompt();
         }).catch(function(err){
             if(err) throw err
         })
     }
+}
+
+// Function that asks user if they would like to stop adding employees
+
+function stopPrompt(){
+    inquirer.prompt([
+        {
+            name: 'stop',
+            type: 'confirm',
+            message: 'Would you like to stop adding employees?'
+        }
+    ]).then(function(res){
+        if(res.stop){
+            const currentEmployeeData = render(employeeArray);
+            fs.writeFile(outputPath, currentEmployeeData, function(err){
+                if(err) throw err;
+            })
+        }else{
+            promptCommon();
+        }
+    })
 }
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
