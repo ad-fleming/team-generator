@@ -12,9 +12,59 @@ const render = require("./lib/htmlRenderer");
 
 
 
+// Define an array which Employee instances will be pushed
+// const employeeArray = [];
 
+// Write a function which prompts user for common information (name, id and email) and lastly, their role.
+promptCommon();
+function promptCommon(userInput){
+    inquirer.prompt([
+        {
+            name: 'employeeName',
+            type: 'input',
+            message: 'Please enter employee name: '
+        },
+        {
+            name: 'employeeId',
+            type: 'input',
+            message: 'Please enter employee id: '
+        },
+        {
+            name: 'employeeEmail',
+            type: 'input',
+            message: 'Please enter employee email address: '
+        },
+        {
+            name: 'employeeRole',
+            type: 'list',
+            message: 'Please select employee role: ',
+            choices: ["Manager", "Engineer", "Intern"]
+        },
+    ]).then(function(res){
+        specialPrompt(res);
+    }).catch(function(err){
+        if(err) throw err;
+        console.log("logged initial prompt answers")
+    })
+} // < -- end of promptCommon();
+// Define function -depending on users answer to employeeRole, ask role specific questions
 
-
+function specialPrompt(userResponse){
+    if(userResponse.employeeRole === "Manager"){
+        inquirer.prompt([
+            {
+                name: 'officeNumber',
+                type: 'input',
+                message: 'Please enter office number: '
+            }
+        ]).then(function(specialResponse){
+            const manager = new Manager(userResponse.employeeName, userResponse.employeeId, userResponse.employeeEmail, specialResponse.officeNumber)
+            console.log(manager);
+        }).catch(function(err){
+            if(err) throw err
+        })
+    }
+}
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
