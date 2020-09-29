@@ -63,6 +63,32 @@ function specialPrompt(userResponse){
         }).catch(function(err){
             if(err) throw err
         })
+    }else if(userResponse.employeeRole === "Engineer"){
+        inquirer.prompt([
+            {
+                name: 'github',
+                type: 'input',
+                message: 'Please enter employee GitHub username: '
+            }
+        ]).then(function(specialResponse){
+            const engineer = new Engineer(userResponse.employeeName, userResponse.employeeId, userResponse.employeeEmail, specialResponse.github)
+            console.log(engineer);
+        }).catch(function(err){
+            if(err) throw err
+        })
+    } else {
+        inquirer.prompt([
+            {
+                name: 'school',
+                type: 'input',
+                message: 'Where did employee attend school?'
+            }
+        ]).then(function(specialResponse){
+            const intern = new Intern(userResponse.employeeName, userResponse.employeeId, userResponse.employeeEmail, specialResponse.school)
+            console.log(intern);
+        }).catch(function(err){
+            if(err) throw err
+        })
     }
 }
 // After the user has input all employees desired, call the `render` function (required
