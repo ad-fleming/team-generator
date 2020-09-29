@@ -12,4 +12,4 @@ I completed this project with the guidance of my tutor and in collaboration with
 Please find links to a video demo below:
 
 #### Video
-(https://drive.google.com/file/d/1MFbK-Yi0hYfPoSyJGbtrVDD0sJMsuZC0/view)
+https://drive.google.com/file/d/1MFbK-Yi0hYfPoSyJGbtrVDD0sJMsuZC0/view
